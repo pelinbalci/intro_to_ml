@@ -237,11 +237,12 @@ Another Explanation is coming from Alex Smola, http://videolectures.net/mlss08au
 There are two vectors in each side of the hyperplane. We would like to maximize the distance between them: 
 
 - The first vector is on the positive side: w * x1 + b = 1
-- The second vector is on the negative side: w * x1 + b = -1
+- The second vector is on the negative side: w * x2 + b = -1
 
 The distance between x1 and x2 : 
 
-- w/ ||w||, (x1-x2) = 2 / ||w||
+- w(x1-x2) = 2 
+- x1- x2 = 2 / ||w||
 
 We would like this distance to be maximized. 
 
