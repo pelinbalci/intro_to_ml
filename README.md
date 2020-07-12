@@ -29,7 +29,8 @@ resources that I've used , I also referenced them in codes and readme files unde
     - Standart scaling & min_max scaling & train_test_split & cross_val & gridsearchcv
 - [K_means](K_means)
     - Manual implementation
-- PCA
+- [PCA](PCA)
+    - example for eigenfaces
 
 
 
