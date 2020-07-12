@@ -26,9 +26,9 @@ X_train_new = selector.fit_transform(X_train, y_train)
 cols = selector.get_support(indices=True)
 cols_name = X.columns[[cols]]
 X_test_new = X_test[:,list(cols)]
+print(cols_name)
 
 reg = LinearRegression()
 reg.fit(X_train_new, y_train)
 pred = reg.predict(X_train_new)
 print('train r^2: ', reg.score(X_test_new, y_test))  # 0.64
-print('done')
