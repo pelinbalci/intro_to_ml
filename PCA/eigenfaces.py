@@ -65,6 +65,8 @@ pca = RandomizedPCA(n_components=n_components, whiten=True).fit(X_train)
 print("done in %0.3fs" % (time() - t0))
 
 eigenfaces = pca.components_.reshape((n_components, h, w))  # pca.components shape: 150, 1850
+# eigenfaces are principal components in the data
+
 
 print("Projecting the input data on the eigenfaces orthonormal basis")
 t0 = time()
@@ -100,6 +102,33 @@ print("done in %0.3fs" % (time() - t0))
 print(classification_report(y_test, y_pred, target_names=target_names))
 print(confusion_matrix(y_test, y_pred, labels=range(n_classes)))
 
+"""
+                   precision    recall  f1-score   support
+
+     Ariel Sharon       0.78      0.54      0.64        13
+     Colin Powell       0.83      0.87      0.85        60
+  Donald Rumsfeld       0.94      0.63      0.76        27
+    George W Bush       0.82      0.98      0.89       146
+Gerhard Schroeder       0.95      0.80      0.87        25
+      Hugo Chavez       1.00      0.47      0.64        15
+       Tony Blair       0.97      0.81      0.88        36
+
+         accuracy                           0.85       322
+        macro avg       0.90      0.73      0.79       322
+     weighted avg       0.87      0.85      0.85       322
+     
+[[  7   1   0   5   0   0   0]
+[  1  52   0   7   0   0   0]
+[  1   2  17   7   0   0   0]
+[  0   3   0 143   0   0   0]
+[  0   1   0   3  20   0   1]
+[  0   3   0   4   1   7   0]
+[  0   1   1   5   0   0  29]]    
+
+"""
+
+
+
 
 ###############################################################################
 # Qualitative evaluation of the predictions using matplotlib
@@ -115,20 +144,21 @@ def plot_gallery(images, titles, h, w, n_row=3, n_col=4):
         pl.xticks(())
         pl.yticks(())
 
-# plot the result of the prediction on a portion of the test set
 
+# plot the result of the prediction on a portion of the test set
 def title(y_pred, y_test, target_names, i):
     pred_name = target_names[y_pred[i]].rsplit(' ', 1)[-1]
     true_name = target_names[y_test[i]].rsplit(' ', 1)[-1]
     return 'predicted: %s\ntrue:      %s' % (pred_name, true_name)
+
 
 prediction_titles = [title(y_pred, y_test, target_names, i)
                          for i in range(y_pred.shape[0])]
 
 plot_gallery(X_test, prediction_titles, h, w)
 
-# plot the gallery of the most significative eigenfaces
 
+# plot the gallery of the most significative eigenfaces
 eigenface_titles = ["eigenface %d" % i for i in range(eigenfaces.shape[0])]
 plot_gallery(eigenfaces, eigenface_titles, h, w)
 
